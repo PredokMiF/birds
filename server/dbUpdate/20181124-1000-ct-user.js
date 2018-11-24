@@ -9,9 +9,9 @@ async function task({ pgAsync }) {
             );
         `)
 
-        await pgAsync.query(`
-            INSERT INTO "user" (login, pass) VALUES ('admin', '34tvq3v4tqc')
-        `)
+        await pgAsync.query(`INSERT INTO "user" (login, pass) VALUES ('admin', 'admin');`);
+        await pgAsync.query(`INSERT INTO "user" (login, pass) VALUES ('manager', 'manager');`);
+        await pgAsync.query(`INSERT INTO "user" (login, pass) VALUES ('reporter', 'reporter');`)
     })
 }
 

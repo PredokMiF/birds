@@ -9,7 +9,8 @@ async function task({ pgAsync }) {
 
         await pgAsync.query(`
             INSERT INTO "roles" (role) VALUES ('admin');
-            INSERT INTO "roles" (role) VALUES ('user');
+            INSERT INTO "roles" (role) VALUES ('manager');
+            INSERT INTO "roles" (role) VALUES ('reporter');
         `)
     })
 }
