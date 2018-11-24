@@ -26,7 +26,7 @@ module.exports.start = async function () {
     require('./koaUse/passportStrategy')(app)
 
     // Routes
-    // require('./koaUse/noCache')(app);
+    require('./koaUse/noCache')(app);
     require('./routes')(app);
 
     // 404
