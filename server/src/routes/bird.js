@@ -4,6 +4,7 @@ const getBirdsByApprovedValue = require('../dao/getBirdsByApprovedValue')
 const getCurrentUserBirdsRecords = require('../dao/getCurrentUserBirdsRecords')
 const approveBirdRecordById = require('../dao/approveBirdRecordById')
 const getBirdsReportByYear = require('../dao/getBirdsReportByYear')
+const getBirdCodesByYear = require('../dao/getBirdCodesByYear')
 
 module.exports = {
     getBirdByMetalRingId: async function (ctx) {
@@ -51,5 +52,10 @@ module.exports = {
     getReportByYear: async function (ctx) {
         const data = await getBirdsReportByYear(ctx.params.year);
         ctx.body = data.rows;
+    },
+
+    getCodesByYear: async function (ctx) {
+        const data = await getBirdCodesByYear(ctx.params.year);
+        ctx.body = data;
     },
 }
