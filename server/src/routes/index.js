@@ -20,7 +20,7 @@ router
     .post('/api/logout', require('./logout'))
     .get('/api/bird/approved', require('./bird').getRecordsByApprovedValue)
     .get('/api/bird/:id', require('./bird').getBirdByMetalRingId)
-    .get('/api/birds-by-user/:id', require('./bird').getRecordsByUserId)
+    .get('/api/birds-by-user', require('./bird').getCurrentUserRecords)
     .post('/api/bird', require('./bird').postNewBird)
 
     // .post('/custom/api/upload', authNeed(require('../api/uploadFile')))

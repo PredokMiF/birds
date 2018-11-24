@@ -1,7 +1,7 @@
 const birdGetById = require('../dao/birdGetById');
 const birdPost = require('../dao/birdPost');
 const getBirdsByApprovedValue = require('../dao/getBirdsByApprovedValue')
-const getBirdsRecordsByUserId = require('../dao/getBirdsRecordsByUserId')
+const getCurrentUserBirdsRecords = require('../dao/getCurrentUserBirdsRecords')
 
 module.exports = {
     getBirdByMetalRingId: async function (ctx) {
@@ -31,13 +31,13 @@ module.exports = {
         ctx.body = data;
     },
 
-    getRecordsByUserId: async function (ctx) {
-        const data = await getBirdsRecordsByUserId(ctx.params.id);
+    getCurrentUserRecords: async function (ctx) {
+        const data = await getCurrentUserBirdsRecords(ctx.session.passport.user);
         ctx.body = data.rows;
     },
 
     getRecordsByApprovedValue: async function (ctx) {
-        const data = await getBirdsByApprovedValue(ctx.params.value);
+        const data = await getBirdsByApprovedValue(ctx.query.value);
         ctx.body = data.rows;
     },
 }
