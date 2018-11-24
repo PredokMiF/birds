@@ -3,6 +3,7 @@ const passport = require('koa-passport')
 const logger = require('../logger')
 const userGet = require('../dao/userGet')
 const userGetByLoginPass = require('../dao/userGetByLoginPass')
+const getUserRoles = require('../dao/getUserRoles');
 
 
 passport.serializeUser(function(user, done) {
@@ -12,6 +13,8 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(async function(id, done) {
     try {
         const user = await userGet(id)
+        const roles = await getUserRoles(id)
+        user.roles = roles
         done(null, user)
     } catch(err) {
         logger.error('passport.deserializeUser error', err)
