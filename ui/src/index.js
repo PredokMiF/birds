@@ -2,10 +2,9 @@ import axios from 'axios'
 import React from 'react'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
-import { HashRouter as Router } from 'react-router-dom'
 
 import { createStore } from './store'
-import { doLogin, doLogout } from './sec/user'
+import { setLogined, setLogouted } from './sec/user'
 import App from './App'
 
 import './app.css'
@@ -15,9 +14,9 @@ axios.post('/api/user').then(({ data: { authorized, user }}) => {
 
     if (authorized) {
         const { id, login, roles } = user
-        store.dispatch(doLogin({ id, login, roles }))
+        store.dispatch(setLogined({ id, login, roles }))
     } else {
-        store.dispatch(doLogout())
+        store.dispatch(setLogouted())
     }
 
     if(process.env.NODE_ENV !== 'production') {
@@ -29,11 +28,9 @@ axios.post('/api/user').then(({ data: { authorized, user }}) => {
 
     function Application () {
         return (
-            <Router>
-                <Provider store={store}>
-                    <App/>
-                </Provider>
-            </Router>
+            <Provider store={store}>
+                <App/>
+            </Provider>
         )
     }
 })

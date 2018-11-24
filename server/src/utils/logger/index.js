@@ -85,20 +85,20 @@ function convertCmn(cmn) {
 
 function getLoggerWrapper(logger) {
     return {
-        debug: function (msg, ...cmns) {
-            logger.log('debug', convertMsg(msg), { date: new Date().toString() }, ...(cmns.map(convertCmn)))
+        debug: function (msg, a1, a2, a3) {
+            logger.log('debug', convertMsg(msg), { date: new Date().toString(), ...convertCmn(a1), ...convertCmn(a2), ...convertCmn(a3) })
         },
 
-        info: function (msg, ...cmns) {
-            logger.log('info', convertMsg(msg), { date: new Date().toString() }, ...cmns.map(convertCmn))
+        info: function (msg, a1, a2, a3) {
+            logger.log('info', convertMsg(msg), { date: new Date().toString(), ...convertCmn(a1), ...convertCmn(a2), ...convertCmn(a3) })
         },
 
-        warn: function (msg, ...cmns) {
-            logger.log('warn', convertMsg(msg), { date: new Date().toString() }, ...cmns.map(convertCmn))
+        warn: function (msg, a1, a2, a3) {
+            logger.log('warn', convertMsg(msg), { date: new Date().toString(), ...convertCmn(a1), ...convertCmn(a2), ...convertCmn(a3) })
         },
 
-        error: function (msg,...cmns) {
-            logger.log('error', convertMsg(msg), { date: new Date().toString() }, ...cmns.map(convertCmn))
+        error: function (msg, a1, a2, a3) {
+            logger.log('error', convertMsg(msg), { date: new Date().toString(), ...convertCmn(a1), ...convertCmn(a2), ...convertCmn(a3) })
         }
     }
 }

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { isAuthorised } from './sec/user';
 
-import Header from './Header';
+import Header from './components/Header';
 import Login from './pages/Login';
 import Report from './pages/Report';
+import Bird from './pages/Bird';
 import AddBird from './pages/AddBird';
 
 class AppBase extends Component {
@@ -18,13 +19,17 @@ class AppBase extends Component {
         }
 
         return (
-            <div>
-                <Header/>
-                <Switch>
-                    <Route path="/report" component={Report}/>
-                    <Route component={AddBird}/>
-                </Switch>
-            </div>
+            <Router>
+                <div>
+                    <Header/>
+                    <Switch>
+                        <Route path="/bird" component={Bird}/>
+                        <Route path="/reports" component={Report}/>
+                        <Route path="/add" component={AddBird}/>
+                        <Route component={AddBird}/>
+                    </Switch>
+                </div>
+            </Router>
         );
     }
 }

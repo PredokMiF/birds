@@ -1,0 +1,13 @@
+.logout-btn {
+    margin-left: 12px;
+
+    svg {
+        display: block;
+        width: 24px;
+        fill: #17a2b8;
+
+        &:hover {
+            fill: white;
+        }
+    }
+}

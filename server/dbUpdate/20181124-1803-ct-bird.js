@@ -12,10 +12,10 @@ async function task({ pgAsync }) {
                 bird_age varchar(255) NOT NULL,
                 circumstances text NOT NULL,
                 approved boolean NOT NULL,
-                user_id serial NOT NULL,
-                approver_id numeric NOT NULL,
+                user_id integer NOT NULL,
+                approver_id integer NOT NULL,
                 PRIMARY KEY (id),
-                FOREIGN KEY (user_id) REFERENCES "user"(id) ON UPDATE CASCADE ON DELETE CASCADE
+                FOREIGN KEY (user_id) REFERENCES "user"(id) ON UPDATE CASCADE ON DELETE CASCADE,
                 FOREIGN KEY (approver_id) REFERENCES "user"(id) ON UPDATE CASCADE ON DELETE CASCADE
             );
         `)
