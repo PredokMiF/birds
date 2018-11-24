@@ -23,6 +23,7 @@ router
     .get('/api/birds-by-user', require('./bird').getCurrentUserRecords)
     .post('/api/approve-record', require('./bird').approveRecordById)
     .post('/api/bird', require('./bird').postNewBird)
+    .get('/api/bird-report/:year', require('./bird').getReportByYear)
 
     // .post('/custom/api/upload', authNeed(require('../api/uploadFile')))
 
