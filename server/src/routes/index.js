@@ -18,6 +18,9 @@ router
     .post('/api/user', require('./user'))
     .get('/api/logout', require('./logout'))
     .post('/api/logout', require('./logout'))
+    .get('/api/bird/approved', require('./bird').getRecordsByApprovedValue)
+    .get('/api/bird/:id', require('./bird').getBirdByMetalRingId)
+    .post('/api/bird', require('./bird').postNewBird)
 
     // .post('/custom/api/upload', authNeed(require('../api/uploadFile')))
 
