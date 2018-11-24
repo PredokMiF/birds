@@ -29,6 +29,16 @@ passport.use(new LocalStrategy(function(username, password, done) {
     userGetByLoginPass(username, password)
         .then(user => {
             if (user) {
+                return getUserRoles(user.id).then(roles => {
+                    user.roles = roles;    
+                    return user;
+                });
+            } 
+            
+            return user;
+        })
+        .then(user => {
+            if (user) {
                 done(null, user)
             } else {
                 done(null, false)
