@@ -1,0 +1,15 @@
+body
+    form(method="POST")
+        table
+            tbody
+                tr
+                    td: label(for="username") Логин:
+                    td: input(id="username" name="username" type="text")
+                tr
+                    td: label(for="password") Пароль:
+                    td: input(id="password" name="password" type="password")
+                tr
+                    td
+                    td: button(type="submit") Войти
+
+    pre#simple-error= error

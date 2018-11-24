@@ -22,6 +22,8 @@ module.exports.start = async function () {
 
     require('./koaUse/koaBody')(app)
 
+    app.use(require('./koaUse/pug'))
+
     // Passport
     require('./koaUse/passportStrategy')(app)
 

@@ -13,7 +13,8 @@ function authNeed(fn) {
 }
 
 router
-    .post('/api/login', require('./login'))
+    .get('/api/login', require('./login').get)
+    .post('/api/login', require('./login').post)
     .post('/api/user', require('./user'))
     .get('/api/logout', require('./logout'))
     .post('/api/logout', require('./logout'))
