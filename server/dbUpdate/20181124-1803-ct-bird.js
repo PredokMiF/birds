@@ -13,7 +13,7 @@ async function task({ pgAsync }) {
                 circumstances text NOT NULL,
                 approved boolean NOT NULL,
                 user_id integer NOT NULL,
-                approver_id integer NOT NULL,
+                approver_id integer,
                 PRIMARY KEY (id),
                 FOREIGN KEY (user_id) REFERENCES "user"(id) ON UPDATE CASCADE ON DELETE CASCADE,
                 FOREIGN KEY (approver_id) REFERENCES "user"(id) ON UPDATE CASCADE ON DELETE CASCADE

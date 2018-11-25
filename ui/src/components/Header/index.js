@@ -39,21 +39,26 @@ class Header extends Component {
             return <Redirect to={`/bird?number=${find}`}/>
         }
 
+        const isReporterOnly = isReporter && !isManager && !isAdmin
+
         return (
             <nav className="navbar navbar-expand navbar-light bg-light">
                 <a className="navbar-brand" href="/app">Save the Birds</a>
 
                 <div className="collapse navbar-collapse">
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/reports">Отчеты</Link>
-                        </li>
+                        {isReporterOnly && <li className="nav-item">
+                            <Link className="nav-link" to="/history">History</Link>
+                        </li>}
+                        {isManager && <li className="nav-item">
+                            <Link className="nav-link" to="/reports">Reports</Link>
+                        </li>}
                         <li className="nav-item">
                             <Link className="nav-link" to="/add">Add New Observation</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/reports">Отчеты</Link>
-                        </li>
+                        {isManager && <li className="nav-item">
+                            <Link className="nav-link" to="/approve">Approve</Link>
+                        </li>}
                     </ul>
                     <form className="form-inline my-2 my-lg-0" onSubmit={this.onSearch}>
                         <input className="form-control mr-sm-2" type="search" value={q} onChange={this.typing} placeholder="Search" aria-label="Search"/>
