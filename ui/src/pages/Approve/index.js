@@ -57,8 +57,8 @@ class Approve extends Component {
                         <th scope="col">Ring</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Age</th>
-                        <th scope="col">circumstances</th>
-                        <th scope="col">approve</th>
+                        <th scope="col">Circumstances</th>
+                        <th scope="col">Approve</th>
                     </tr>
                     </thead>
                     <tbody>

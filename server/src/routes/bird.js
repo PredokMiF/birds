@@ -14,7 +14,7 @@ module.exports = {
 
     /**
      * Example of request.body:
-     * 
+     *
      * {
      * 	"latitude": "50",
      * 	"longitude": "50",
@@ -27,10 +27,12 @@ module.exports = {
      * 	"user_id": 3,
      * 	"approver_id": 1
      * }
-     * 
+     *
      */
     postNewBird: async function (ctx) {
-        const data = await birdPost(ctx.request.body);
+        const myId = ctx.session.passport.user
+        const isManager = ctx.state.user.roles.includes('manager')
+        const data = await birdPost(ctx.request.body, myId, isManager, isManager ? myId : null);
         ctx.body = data;
     },
 
@@ -45,7 +47,7 @@ module.exports = {
     },
 
     approveRecordById: async function (ctx) {
-        const data = await approveBirdRecordById(ctx.request.body.id);
+        const data = await approveBirdRecordById(ctx.request.body.id, ctx.session.passport.user);
         ctx.body = data;
     },
 

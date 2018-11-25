@@ -1,4 +1,4 @@
-const refbook = [
+export const refbook = [
  { value: '0', label: '[0] Unknown' },
  { value: '1', label: '[1] Pullus' },
  { value: '2', label: '[2] Full-grown' },

@@ -96,8 +96,8 @@ class Bird extends Component {
                             <th scope="col">Ring</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Age</th>
-                            <th scope="col">circumstances</th>
-                            <th scope="col">approved</th>
+                            <th scope="col">Circumstances</th>
+                            <th scope="col">Approved</th>
                         </tr>
                         </thead>
                         <tbody>

@@ -1,77 +1,141 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 
+import { refbook as refbookBirdType } from '../../util/refBird'
+import { refbook as refbookBirdGender } from '../../util/refGender'
+import { refbook as refbookAge } from '../../util/refAge'
+import { refbook as refbookCircums } from '../../util/refCircums'
+
+import { validate } from './validate'
 import { submit } from './submit'
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
-    <div>
-        <label>{label}</label>
-        <div>
-            <input {...input} placeholder={label} type={type} />
-            {touched && error && <span>{error}</span>}
+const renderTextField = ({ input, label, type, meta: { touched, error } }) => (
+    <div className="form-group row">
+        <label htmlFor={input.name} className="col-sm-3 col-form-label">{label}</label>
+        <div className="col-sm-9">
+            <input {...input} type={type} className={'form-control ' + (touched && error ? 'is-invalid' : '')} id={input.name} placeholder={label}/>
+            {touched && error && <div className="invalid-feedback">{error}</div>}
         </div>
     </div>
 )
 
-const AddBirdForm = props => {
-    const { error, handleSubmit, pristine, reset, submitting } = props
+const renderSelectField = ({ input, label, type, meta: { touched, error }, list }) => (
+    <div className="form-group row">
+        <label htmlFor={input.name} className="col-sm-3 col-form-label">{label}</label>
+        {/*
+            <input {...input} type={type} className="form-control" id={input.name} placeholder={label}/>
+        </div>*/}
+        <div className="col-sm-9">
+            <select {...input} className={'form-control ' + (touched && error ? 'is-invalid' : '')} id={input.name} >
+                <option value={null}/>
+                {list.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
+            </select>
+            {touched && error && <div className="invalid-feedback">{error}</div>}
+        </div>
+    </div>
+)
+
+function AddBirdForm(props) {
+    const {error, handleSubmit, submitting} = props
     return (
         <form onSubmit={handleSubmit(submit)}>
             <Field
-                name="date"
+                name="bird_type"
+                component={renderSelectField}
+                label="Bird Name"
+                list={refbookBirdType}
+            />
+            <Field
+                name="metal_ring_id"
+                type="text"
+                component={renderTextField}
+                label="Ring Number"
+            />
+            <Field
+                name="date_of_record"
                 type="date"
-                component={renderField}
-                label="Username"
+                component={renderTextField}
+                label="Date"
             />
             <Field
-                name="bird"
-                type="text"
-                component={renderField}
-                label="Птица"
+                name="bird_gender"
+                component={renderSelectField}
+                label="Gender"
+                list={refbookBirdGender}
             />
             <Field
-                name="number"
-                type="text"
-                component={renderField}
-                label="Номер метал. кольца"
-            />
-            <Field
-                name="sex"
-                type="text"
-                component={renderField}
-                label="Пол"
+                name="bird_age"
+                component={renderSelectField}
+                label="Age"
+                list={refbookAge}
             />
             <Field
                 name="circumstances"
-                type="text"
-                component={renderField}
-                label="Оюстоятельства"
+                component={renderSelectField}
+                label="Circumstances"
+                list={refbookCircums}
             />
             <Field
-                name="d1"
+                name="latitude"
                 type="text"
-                component={renderField}
-                label="Широта"
+                component={renderTextField}
+                label="Latitude"
             />
             <Field
-                name="d2"
+                name="longitude"
                 type="text"
-                component={renderField}
-                label="Долгота"
+                component={renderTextField}
+                label="Longitude"
             />
-            {error && <strong>{error}</strong>}
-            <div>
-                <button type="submit" disabled={submitting}>
-                    Log In
-                </button>
-                <button type="button" disabled={pristine || submitting} onClick={reset}>
-                    Clear Values
-                </button>
+            <div className="form-group row">
+                <div className="col-sm-3"/>
+                <div className="col-sm-9">
+                    {error && <div style={{color: 'red'}}>{error}</div>}
+
+                    <button type="submit" className="btn btn-info" disabled={submitting}>
+                        Add
+                    </button>
+                </div>
+
             </div>
         </form>
     )
 }
 
-export default reduxForm({
-    form: 'addBird'
+const MyForm = reduxForm({
+    form: 'addBird',
+    validate,
 })(AddBirdForm)
+
+export default class MyFormWrapper extends Component {
+
+    state = {
+        showForm: true,
+        initialValues: {},
+    }
+
+    submitHandler = values => {
+        this.setState({ initialValues: values, showForm: false })
+    }
+
+    addMore = () => {
+        this.setState({ showForm: true })
+    }
+
+    render(){
+        const { initialValues, showForm } = this.state
+
+        if (showForm) {
+            return (
+                <MyForm initialValues={initialValues} submitHandler={this.submitHandler} />
+            )
+        }
+
+        return (
+            <div>
+                <h5>Done!</h5>
+                <button type="button" className="btn btn-info" onClick={this.addMore}>Add one more item</button>
+            </div>
+        )
+    }
+}

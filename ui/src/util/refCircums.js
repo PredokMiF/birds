@@ -1,4 +1,4 @@
-const refbook = [
+export const refbook = [
     { value: '00', label: '(00) "Fond" (letter reports "found"), no mention of the bird or its body in recovery report' },
     { value: '01', label: '(01) Found, bird or body mentioned in recovery letter' },
     { value: '02', label: '(02) Ring only found in circumstances where the bird could have endet ist life without transported information in the field' },

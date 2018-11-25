@@ -1,4 +1,4 @@
-const refbook = [
+export const refbook = [
     { value: '00020', label: 'Gavia stellata' },
     { value: '00030', label: 'Gavia arctica' },
     { value: '00050', label: 'Gavia adamsii' },
@@ -242,7 +242,7 @@ const refbook = [
     { value: '12500', label: 'Acrocephalus palustris' },
     { value: '12510', label: 'Acrocephalus scirpaceus' },
     { value: '12530', label: 'Acrocephalus arundinaceus' },
-    { value: '12549', label: 'sp.' },
+    { value: '12549', label: 'Acrocephalus sp.' },
     { value: '12590', label: 'Hippolais icterina' },
     { value: '12730', label: 'Sylvia nisoria' },
     { value: '12740', label: 'Sylvia curruca' },
@@ -315,7 +315,7 @@ const refbook = [
     { value: '18770', label: 'Emberiza schoeniclus' },
     { value: '18780', label: 'Emberiza pallasi' },
     { value: '18820', label: 'Miliaria calandra' },
-]
+].sort((a, b) => a.label < b.label ? -1 : a.label > b.label ? 1 : 0)
 
 export function getBirdHuman(value) {
     const item = refbook.filter(item => item.value === value)[0]
